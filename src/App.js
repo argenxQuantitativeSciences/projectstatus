@@ -127,12 +127,6 @@ function App() {
       });
     };
 
-  // TODO: also will need to schedule a job to run the code to build the JSON file
-  // %lsaf_search( lsaf_name=projectstatus.html);
-  // proc json out='c:/temp/projectstatus.json' pretty ;
-  //    export lsafsearch ;
-  // run ;
-
   useEffect(() => {
     if (href.startsWith("http://localhost")) {
       const tempRows = projectstatus["SASTableData+LSAFSEARCH"],
@@ -148,7 +142,7 @@ function App() {
     fetch(url).then(function (response) {
       response.json().then(function (response) {
         const tempRows = response["SASTableData+LSAFSEARCH"],
-          tempInfo = projectstatus["SASTableData+INFO"];
+          tempInfo = response["SASTableData+INFO"];
         modifyData(tempRows);
         setRows(tempRows);
         setInfo(tempInfo[0].info);
